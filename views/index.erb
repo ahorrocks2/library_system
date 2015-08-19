@@ -15,3 +15,11 @@
 <p>There are no books available!</p>
 
 <% end %>
+
+<form action="/new-book" method="post">
+  <label for="new_book">Add a book:</label>
+  <input id="new_book" name="new_book" type="text" placeholder="ex. The Great Gatsby">
+
+  <button type="submit" class="btn-danger">Add book!</button>
+
+</form>

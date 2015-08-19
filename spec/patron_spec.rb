@@ -14,4 +14,20 @@ describe(Patron) do
     end
   end
 
+  describe('#==') do
+    it('overright the equal comparator') do
+      test_patron1 = Patron.new(:name => 'Ricky Bobby', :patron_id => 1, :book_id => 1)
+      test_patron2 = Patron.new(:name => 'Ricky Bobby', :patron_id => 1, :book_id => 1)
+      expect(test_patron1).to(eq(test_patron2))
+    end
+  end
+
+  describe('#save') do
+    it('allow a patron to be saved in list') do
+      test_patron = Patron.new(:name => 'Ricky Bobby', :patron_id => nil, :book_id => 1)
+      test_patron.save()
+      expect(Patron.all()).to(eq([test_patron]))
+    end
+  end
+
 end

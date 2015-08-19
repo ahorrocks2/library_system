@@ -20,6 +20,12 @@ attr_reader(:name, :book_id, :patron_id)
     patrons
   end
 
+  define_method(:==) do |another_patron|
+    self.name() == another_patron.name() && self.patron_id() == another_patron.patron_id()
+  end
 
-
+  define_method(:save) do
+    result = DB.exec("INSERT INTO patrons (name, book_id) VALUES ('#{@name}', #{@book_id}) RETURNING patron_id;")
+    @patron_id = result.first().fetch("patron_id").to_i()
+  end
 end

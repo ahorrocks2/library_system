@@ -28,4 +28,15 @@ attr_reader(:name, :book_id, :patron_id)
     result = DB.exec("INSERT INTO patrons (name, book_id) VALUES ('#{@name}', #{@book_id}) RETURNING patron_id;")
     @patron_id = result.first().fetch("patron_id").to_i()
   end
+
+  define_singleton_method(:find) do |id|
+    found_patron = nil
+    Patron.all().each() do |patron|
+      if patron.patron_id == id
+        found_patron = patron
+      end
+    end
+    found_patron
+  end
+
 end

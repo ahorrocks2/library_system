@@ -1,0 +1,17 @@
+<h1>Welcome to the Library of Pair of Three</h1>
+
+
+<% if @books.any?() %>
+<p>Books currently available:</p>
+
+<ul>
+  <% @books.each() do |book| %>
+  <li><%= book.title() %> + by: + <%= book.author() %></li>
+  <% end %>
+</ul>
+
+<% else %>
+
+<p>There are no books available!</p>
+
+<% end %>

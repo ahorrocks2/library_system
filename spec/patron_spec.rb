@@ -24,9 +24,18 @@ describe(Patron) do
 
   describe('#save') do
     it('allow a patron to be saved in list') do
-      test_patron = Patron.new(:name => 'Ricky Bobby', :patron_id => nil, :book_id => 1)
+      test_patron = Patron.new({:name => 'Ricky Bobby', :patron_id => nil, :book_id => 1})
       test_patron.save()
       expect(Patron.all()).to(eq([test_patron]))
+    end
+  end
+
+  describe('#update') do
+    it('allow user to update a patrons information') do
+      test_patron = Patron.new({:name => 'Ricky Bobby', :patron_id => nil, :book_id => 1})
+      test_patron.save()
+      test_patron.update({:name => 'Shake N Bake', :patron_id => nil, :book_id => 1})
+      expect(test_patron.name()).to(eq('Shake N Bake'))
     end
   end
 

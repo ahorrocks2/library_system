@@ -31,6 +31,13 @@ class Book
     self.book_title == another_book.book_title() && self.book_author == another_book.book_author()
   end
 
+  define_method(:update) do |attributes|
+    @book_title = attributes.fetch(:book_title, @book_title)
+    @book_id = self.book_id()
+    DB .exec("UPDATE books SET title = '#{@book_title}' WHERE book_id = #{@book_id};")
+  end
+
+
   define_singleton_method(:find_title) do |title|
     found_book = nil
     Book.all().each() do |book|
@@ -70,4 +77,5 @@ class Book
     end
     found_book
   end
+
 end

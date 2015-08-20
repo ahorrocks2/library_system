@@ -72,4 +72,14 @@ describe(Book) do
       expect(Book.find_book_id(test_book1.book_id.to_i)).to(eq(test_book1))
     end
   end
+
+  describe('#update') do
+    it('will update the database of books') do
+      test_book1 = Book.new({:book_title => 'The Great Gatsby', :book_author => 'F. Scott Fitzgerald', :book_genre => 'Fiction', :book_id => nil})
+      test_book1.save()
+      test_book1.update({:book_title => 'The Great Gatsby : Collectors Ed.', :book_author => 'F. Scott Fitzgerald', :book_genre => 'Fiction', :book_id => nil})
+      expect(test_book1.book_title()).to(eq('The Great Gatsby : Collectors Ed.'))
+    end
+  end
+
 end

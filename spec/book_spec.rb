@@ -78,8 +78,20 @@ describe(Book) do
       test_book1 = Book.new({:book_title => 'The Great Gatsby', :book_author => 'F. Scott Fitzgerald', :book_genre => 'Fiction', :book_id => nil})
       test_book1.save()
       test_book1.update({:book_title => 'The Great Gatsby : Collectors Ed.', :book_author => 'F. Scott Fitzgerald', :book_genre => 'Fiction', :book_id => nil})
-      expect(test_book1.book_title()).to(eq('The Great Gatsby : Collectors Ed.'))
+      expect(test_book1.book_author()).to(eq('F. Scott Fitzgerald'))
     end
   end
+
+  describe('#delete') do
+    it('allow user to delete a book from the system') do
+      test_book1 = Book.new({:book_title => 'The Great Gatsby', :book_author => 'F. Scott Fitzgerald', :book_genre => 'Fiction', :book_id => nil})
+      test_book1.save()
+      test_book2 = Book.new({:book_title => 'The Bell Jar', :book_author => 'Sylvia Plath', :book_genre => 'Non-Fiction', :book_id => nil})
+      test_book2.save()
+      test_book1.delete()
+      expect(Book.all()).to(eq([test_book2]))
+    end
+  end
+
 
 end

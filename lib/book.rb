@@ -33,10 +33,15 @@ class Book
 
   define_method(:update) do |attributes|
     @book_title = attributes.fetch(:book_title, @book_title)
+    @book_author = attributes.fetch(:book_author,@book_author)
+    @book_genre = attributes.fetch(:book_genre, @book_genre)
     @book_id = self.book_id()
-    DB .exec("UPDATE books SET title = '#{@book_title}' WHERE book_id = #{@book_id};")
+    DB.exec("UPDATE books SET title = '#{@book_title}' WHERE book_id = #{@book_id};")
   end
 
+  define_method(:delete) do
+    DB.exec("DELETE FROM books WHERE book_id = #{self.book_id()};")
+  end
 
   define_singleton_method(:find_title) do |title|
     found_book = nil

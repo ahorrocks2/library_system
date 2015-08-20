@@ -6,7 +6,7 @@
 
 <ul>
   <% @books.each() do |book| %>
-  <li><%= book.title() %> + by: + <%= book.author() %></li>
+  <li><%= book.book_title() %>, <%= book.book_author() %></li>
   <% end %>
 </ul>
 
@@ -16,10 +16,10 @@
 
 <% end %>
 
-<form action="/new-book" method="post">
-  <label for="new_book">Add a book:</label>
-  <input id="new_book" name="new_book" type="text" placeholder="ex. The Great Gatsby">
-
+<form action= "/new_book" method="post">
+  <input id="new_title" name="new_title" type="text" placeholder="ex. The Great Gatsby">
+  <input id="new_author" name="new_author" type="text" placeholder="ex. F. Scott Fitzgerald">
+  <input id="new_genre" name="new_genre" type="text" placeholder="Fiction or Nonfiction?">
   <button type="submit" class="btn-danger">Add book!</button>
 
 </form>

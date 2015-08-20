@@ -35,6 +35,10 @@ attr_reader(:name, :book_id, :patron_id)
     DB.exec("UPDATE patrons SET name = '#{@name}' WHERE patron_id = #{@patron_id};")
   end
 
+  define_method(:delete) do
+    DB.exec("DELETE FROM patrons WHERE patron_id = #{self.patron_id()};")
+  end
+
   define_singleton_method(:find) do |id|
     found_patron = nil
     Patron.all().each() do |patron|

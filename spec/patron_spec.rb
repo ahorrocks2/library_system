@@ -39,10 +39,21 @@ describe(Patron) do
     end
   end
 
+  describe('#delete') do
+    it('allows user to delete a patrons') do
+      test_patron1 = Patron.new({:name => 'Ricky Bobby', :patron_id => nil, :book_id => 1})
+      test_patron1.save()
+      test_patron2 = Patron.new({:name => 'Madonna', :patron_id => nil, :book_id => 1})
+      test_patron2.save()
+      test_patron1.delete()
+      expect(Patron.all()).to(eq([test_patron2]))
+    end
+  end
+
   describe('.find') do
     it('return a patron by their id') do
-      test_patron1 = Patron.new(:name => 'Ricky Bobby', :patron_id => nil, :book_id => 1)
-      test_patron2 = Patron.new(:name => 'Madonna', :patron_id => nil, :book_id => 1)
+      test_patron1 = Patron.new({:name => 'Ricky Bobby', :patron_id => nil, :book_id => 1})
+      test_patron2 = Patron.new({:name => 'Madonna', :patron_id => nil, :book_id => 1})
       test_patron1.save()
       test_patron2.save()
       expect(Patron.find(test_patron1.patron_id().to_i)).to(eq(test_patron1))

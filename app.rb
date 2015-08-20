@@ -1,16 +1,21 @@
 require("sinatra")
 require("sinatra/reloader")
-also_reload("lib/**/*.rb")
 require("./lib/book")
 require("./lib/patron")
 require("pg")
+
+also_reload("lib/**/*.rb")
 
 DB = PG.connect({:dbname => "library_system_test"})
 
 get('/') do
   @books = Book.all()
-
   erb(:index)
+end
+
+get('/patrons') do
+  @patrons = Patron.all()
+  erb(:patrons)
 end
 
 post('/new_book') do
@@ -21,4 +26,12 @@ post('/new_book') do
   new_book.save()
 
   redirect('/')
+end
+
+post('/new_patron') do
+  name = params.fetch('new_name')
+  new_patron = Patron.new({:name => name, :book_id => 1, :patron_id => nil})
+  new_patron.save()
+
+  redirect('/patrons')
 end

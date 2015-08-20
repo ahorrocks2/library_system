@@ -19,3 +19,19 @@ describe('the book path', {:type => :feature}) do
   end
 
 end
+
+describe('the patrons path', {:type => :feature}) do
+  it('allows the user to see a list of patrons and add new patrons') do
+    visit('/')
+    click_on('Patrons Page')
+    expect(page).to have_content('Expecto Patronus')
+  end
+
+  it('allows the user to add a patron') do
+      visit('/patrons')
+      fill_in('new_name', :with => 'Hermione Granger')
+      click_button('Add A Patron!')
+      expect(page).to have_content('Hermione Granger')
+  end
+
+end

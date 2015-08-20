@@ -1,5 +1,6 @@
 require('capybara/rspec')
 require('./app')
+require('spec_helper')
 Capybara.app = Sinatra::Application
 set(:show_exceptions,false)
 
@@ -16,6 +17,16 @@ describe('the book path', {:type => :feature}) do
     fill_in('new_genre', :with => 'Fiction')
     click_button('Add book!')
     expect(page).to have_content('The Great Gatsby')
+  end
+
+  it('allows the user to go to an individual books page') do
+    visit('/')
+    fill_in('new_title', :with => 'The Great Gatsby')
+    fill_in('new_author', :with => 'F. Scott Fitzgerald')
+    fill_in('new_genre', :with => 'Fiction')
+    click_button('Add book!')
+    click_link('The Great Gatsby')
+    expect(page).to have_content('F. Scott Fitzgerald')
   end
 
 end

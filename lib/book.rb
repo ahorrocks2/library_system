@@ -43,37 +43,7 @@ class Book
     DB.exec("DELETE FROM books WHERE book_id = #{self.book_id()};")
   end
 
-  define_singleton_method(:find_title) do |title|
-    found_book = nil
-    Book.all().each() do |book|
-      if book.book_title() == title
-        found_book = book
-      end
-    end
-    found_book
-  end
-
-  define_singleton_method(:find_author) do |author|
-    found_book = nil
-    Book.all().each() do |book|
-      if book.book_author() == author
-        found_book = book
-      end
-    end
-    found_book
-  end
-
-  define_singleton_method(:find_genre) do |genre|
-    found_book = nil
-    Book.all().each() do |book|
-      if book.book_genre() == genre
-        found_book = book
-      end
-    end
-    found_book
-  end
-
-  define_singleton_method(:find_book_id) do |id|
+  define_singleton_method(:find) do |id|
     found_book = nil
     Book.all().each() do |book|
       if book.book_id() == id

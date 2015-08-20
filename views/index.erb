@@ -6,21 +6,25 @@
 
 <ul>
   <% @books.each() do |book| %>
-  <li><%= book.book_title() %>, <%= book.book_author() %></li>
+  <li><a href="/book/<%=book.book_id() %>"><%= book.book_title() %>, <%= book.book_author() %></a></li>
   <% end %>
 </ul>
 
 <% else %>
 
-<p>There are no books available!</p>
+<p class="text-danger">There are no books available!</p>
+
 
 <% end %>
 
-<form action= "/new_book" method="post">
-  <input id="new_title" name="new_title" type="text" placeholder="ex. The Great Gatsby">
-  <input id="new_author" name="new_author" type="text" placeholder="ex. F. Scott Fitzgerald">
-  <input id="new_genre" name="new_genre" type="text" placeholder="Fiction or Nonfiction?">
-  <button type="submit" class="btn-danger">Add book!</button>
+<form action= "/new_book" method="post" class="form-horizontal">
+  <fieldset>
+    
+    <input id="new_title" name="new_title" type="text" placeholder="ex. The Great Gatsby">
+    <input id="new_author" name="new_author" type="text" placeholder="ex. F. Scott Fitzgerald">
+    <input id="new_genre" name="new_genre" type="text" placeholder="Fiction or Nonfiction?">
+    <button type="submit" class="btn-danger">Add book!</button>
+  </fieldset>
 </form>
 
 <p>
